@@ -7,7 +7,7 @@ const style = {
   borderRadius: 2,
   border: '1px solid',
   borderColor: 'divider',
-  backgroundColor: 'background.paper',
+  //backgroundColor: 'background.paper',
 };
 
 export function ListDividers() {

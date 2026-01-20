@@ -4,11 +4,14 @@ import {Button} from "@mui/material";
 import {SvgIcon} from "@mui/material";
 import {styled} from "@mui/material"; 
 import { useState } from "react";
+import { Stack, } from "@mui/material";
 
 
 import * as React from "react";
 import { CircularIndeterminate } from "./utils/circularIdeterminate";
-import { HoverRating } from "./utils/hoverRating";
+import { ButtonGroup } from "@mui/material";
+import BasicButtonGroup from "./utils/BasicButtonGroup";
+
 
 
 
@@ -109,10 +112,12 @@ const runPrediction = async () => {
         <Typography variant="h4" gutterBottom>
          Please rate the accuracy of the predicition
         </Typography>
-        <HoverRating />
-         <Button sx={{ width: 400 }} >
-        Submit Review
-        </Button>
+       <Stack direction="row" spacing={2} alignItems="center">
+  {BasicButtonGroup()}
+  <Button sx={{ width: 400 }}>
+    Submit Review
+  </Button>
+</Stack>
 
     </div>
   );
