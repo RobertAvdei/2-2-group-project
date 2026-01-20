@@ -101,7 +101,6 @@ const runPrediction = async () => {
       <pre
         style={{
           padding: "1rem",
-          background: "#f5f5f5",
           borderRadius: "6px",
         }}
       >
