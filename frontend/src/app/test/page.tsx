@@ -19,6 +19,7 @@ import {ListItemText} from "@mui/material";
 import {Divider} from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 
+
 import * as React from "react";
 
 
@@ -190,6 +191,7 @@ const runPrediction = async () => {
       <Button
         component="label"
         variant="outlined"
+        sx={{ width: 200 }} 
         startDecorator={
           <SvgIcon>
             <svg
@@ -198,7 +200,7 @@ const runPrediction = async () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-            >
+              >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -212,7 +214,8 @@ const runPrediction = async () => {
         <VisuallyHiddenInput type="file" onChange={handleFileChange} />
       </Button>
 
-      <Button onClick={runPrediction}>
+      <Button  onClick={runPrediction}
+      sx={{ width: 200 }} >
         Run Prediction
       </Button>
 
@@ -231,7 +234,7 @@ const runPrediction = async () => {
          Please rate the accuracy of the predicition
         </Typography>
         <HoverRating />
-         <Button >
+         <Button sx={{ width: 400 }} >
         Submit Review
         </Button>
 
@@ -290,7 +293,7 @@ export  function HoverRating() {
       <Rating
         name="hover-feedback"
         value={value}
-        precision={0.5}
+        precision={1}
         getLabelText={getLabelText}
         onChange={(event, newValue) => {
           setValue(newValue);
