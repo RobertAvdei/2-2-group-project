@@ -44,3 +44,12 @@ def upload():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3002, debug=True)
+
+
+"""
+basic serving endpoint
+receives image uploads
+forwards images to storage service
+sends logs to monitoring service
+returns json response
+""" 
