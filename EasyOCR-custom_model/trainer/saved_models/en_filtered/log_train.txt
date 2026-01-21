@@ -1492,3 +1492,12 @@ Ground Truth              | Prediction                | Confidence Score & T/F
 scullery                  | scullery                  | 0.3461	True
 Dhabi                     | Dhabi                     | 0.4952	True
 --------------------------------------------------------------------------------
+[1200/4000] Train loss: 0.08222, Valid loss: 0.13590, Elapsed_time: 1026.12431
+Current_accuracy : 79.425, Current_norm_ED  : 0.9628
+Best_accuracy    : 80.475, Best_norm_ED     : 0.9646
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+Goldfarb                  | goldfar                   | 0.0845	False
+sobrieties                | sobrieties                | 0.7087	True
+--------------------------------------------------------------------------------
