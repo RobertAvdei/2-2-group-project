@@ -4,7 +4,7 @@ services:
     ports:
       - '127.0.0.1:5432:5432'
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data
     #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -100,11 +100,16 @@ services:
       interval: 10s
       timeout: 5s
       retries: 30
-
   storage:
     build: ./storage
     ports:
       - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+
 
   serving:
     build: ./serving
