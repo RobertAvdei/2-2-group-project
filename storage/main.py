@@ -26,7 +26,7 @@ def create_engine_with_retry(retries=10, sleep_s=2):
 
 engine = create_engine_with_retry()
 
-# Create tables once at startup
+# MINIO for images but informatioon about images stored in Postgres
 with engine.begin() as conn:
     conn.execute(text("""
         CREATE TABLE IF NOT EXISTS images (
