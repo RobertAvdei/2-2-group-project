@@ -1285,3 +1285,210 @@ Ground Truth              | Prediction                | Confidence Score & T/F
 Helioporidae              | Hlelioporidae             | 0.3454	False
 extra-articular           | exra-anticular            | 0.0734	False
 --------------------------------------------------------------------------------
+[50/4000] Train loss: 0.11797, Valid loss: 0.21733, Elapsed_time: 7.89206
+Current_accuracy : 69.200, Current_norm_ED  : 0.9384
+Best_accuracy    : 69.200, Best_norm_ED     : 0.9384
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+luter                     | luter                     | 0.3036	True
+neglector                 | neglector                 | 0.4915	True
+--------------------------------------------------------------------------------
+[100/4000] Train loss: 0.11742, Valid loss: 0.17529, Elapsed_time: 57.22155
+Current_accuracy : 75.350, Current_norm_ED  : 0.9529
+Best_accuracy    : 75.350, Best_norm_ED     : 0.9529
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+ice-free                  | ice-free                  | 0.2678	True
+micro-instrumentation     | nicroinsrumentaion        | 0.0007	False
+--------------------------------------------------------------------------------
+[150/4000] Train loss: 0.11748, Valid loss: 0.16396, Elapsed_time: 111.58430
+Current_accuracy : 75.825, Current_norm_ED  : 0.9548
+Best_accuracy    : 75.825, Best_norm_ED     : 0.9548
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+forehooves                | forehooes                 | 0.1443	False
+nonintelligence           | nonintelligence           | 0.4684	True
+--------------------------------------------------------------------------------
+[200/4000] Train loss: 0.11305, Valid loss: 0.15932, Elapsed_time: 157.74704
+Current_accuracy : 76.463, Current_norm_ED  : 0.9553
+Best_accuracy    : 76.463, Best_norm_ED     : 0.9553
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+notaries                  | notaries                  | 0.5090	True
+deceasing                 | deceasing                 | 0.7189	True
+--------------------------------------------------------------------------------
+[250/4000] Train loss: 0.10865, Valid loss: 0.16949, Elapsed_time: 203.29364
+Current_accuracy : 75.162, Current_norm_ED  : 0.9535
+Best_accuracy    : 76.463, Best_norm_ED     : 0.9553
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+irremittable              | iremittable               | 0.3749	False
+milk-drying               | milk-drying               | 0.0447	True
+--------------------------------------------------------------------------------
+[300/4000] Train loss: 0.11813, Valid loss: 0.15379, Elapsed_time: 248.12118
+Current_accuracy : 77.375, Current_norm_ED  : 0.9586
+Best_accuracy    : 77.375, Best_norm_ED     : 0.9586
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+koila                     | kidlla                    | 0.0489	False
+pron                      | prun                      | 0.1999	False
+--------------------------------------------------------------------------------
+[350/4000] Train loss: 0.10887, Valid loss: 0.14974, Elapsed_time: 290.80137
+Current_accuracy : 77.825, Current_norm_ED  : 0.9597
+Best_accuracy    : 77.825, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+pentagrams                | pentagrams                | 0.6944	True
+dhobie                    | dhobie                    | 0.4912	True
+--------------------------------------------------------------------------------
+[400/4000] Train loss: 0.12044, Valid loss: 0.15543, Elapsed_time: 333.76564
+Current_accuracy : 77.312, Current_norm_ED  : 0.9583
+Best_accuracy    : 77.825, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+Brenham                   | Brenham                   | 0.8161	True
+preliquidated             | preliquidated             | 0.6017	True
+--------------------------------------------------------------------------------
+[450/4000] Train loss: 0.10059, Valid loss: 0.15301, Elapsed_time: 375.81284
+Current_accuracy : 76.862, Current_norm_ED  : 0.9572
+Best_accuracy    : 77.825, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+scotches                  | scotches                  | 0.7512	True
+methylenimine             | methylenmine              | 0.0435	False
+--------------------------------------------------------------------------------
+[500/4000] Train loss: 0.10345, Valid loss: 0.15730, Elapsed_time: 421.17890
+Current_accuracy : 77.263, Current_norm_ED  : 0.9577
+Best_accuracy    : 77.825, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+expilation                | expilation                | 0.4310	True
+stumpsucker               | stumpsucker               | 0.0914	True
+--------------------------------------------------------------------------------
+[550/4000] Train loss: 0.10681, Valid loss: 0.14645, Elapsed_time: 465.24875
+Current_accuracy : 77.575, Current_norm_ED  : 0.9592
+Best_accuracy    : 77.825, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+twelve-part               | twelve-part               | 0.2248	True
+skills                    | skills                    | 0.9319	True
+--------------------------------------------------------------------------------
+[600/4000] Train loss: 0.10292, Valid loss: 0.15146, Elapsed_time: 507.21481
+Current_accuracy : 78.225, Current_norm_ED  : 0.9594
+Best_accuracy    : 78.225, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+Cesti                     | Cesti                     | 0.6796	True
+supercompetition          | superoompeticon           | 0.0160	False
+--------------------------------------------------------------------------------
+[650/4000] Train loss: 0.09916, Valid loss: 0.15586, Elapsed_time: 549.78326
+Current_accuracy : 77.438, Current_norm_ED  : 0.9590
+Best_accuracy    : 78.225, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+dramatize                 | draratize                 | 0.1397	False
+voluptuousnesses          | volupluousnesses          | 0.0650	False
+--------------------------------------------------------------------------------
+[700/4000] Train loss: 0.11722, Valid loss: 0.15676, Elapsed_time: 594.47962
+Current_accuracy : 76.225, Current_norm_ED  : 0.9549
+Best_accuracy    : 78.225, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+stearine                  | stearine                  | 0.7575	True
+monuments                 | monuments                 | 0.7158	True
+--------------------------------------------------------------------------------
+[750/4000] Train loss: 0.10365, Valid loss: 0.15464, Elapsed_time: 638.03323
+Current_accuracy : 77.150, Current_norm_ED  : 0.9570
+Best_accuracy    : 78.225, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+Neanderthal               | Neanderthal               | 0.1738	True
+Bobtown                   | Bobtown                   | 0.6935	True
+--------------------------------------------------------------------------------
+[800/4000] Train loss: 0.10426, Valid loss: 0.15487, Elapsed_time: 680.59641
+Current_accuracy : 77.888, Current_norm_ED  : 0.9582
+Best_accuracy    : 78.225, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+anti-France               | onti-france               | 0.1347	False
+tracingly                 | tracingly                 | 0.3698	True
+--------------------------------------------------------------------------------
+[850/4000] Train loss: 0.09847, Valid loss: 0.14539, Elapsed_time: 725.49933
+Current_accuracy : 77.950, Current_norm_ED  : 0.9593
+Best_accuracy    : 78.225, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+unmixed                   | unmixed                   | 0.7665	True
+warningly                 | warningly                 | 0.4832	True
+--------------------------------------------------------------------------------
+[900/4000] Train loss: 0.10493, Valid loss: 0.14694, Elapsed_time: 770.18067
+Current_accuracy : 77.587, Current_norm_ED  : 0.9591
+Best_accuracy    : 78.225, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+coxalgias                 | coxalgias                 | 0.3034	True
+semiearly                 | semiearly                 | 0.1237	True
+--------------------------------------------------------------------------------
+[950/4000] Train loss: 0.09942, Valid loss: 0.15718, Elapsed_time: 813.43906
+Current_accuracy : 76.538, Current_norm_ED  : 0.9567
+Best_accuracy    : 78.225, Best_norm_ED     : 0.9597
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+Toryize                   | Toryicze                  | 0.2170	False
+peritrochoid              | peritrochoid              | 0.1812	True
+--------------------------------------------------------------------------------
+[1000/4000] Train loss: 0.10181, Valid loss: 0.14250, Elapsed_time: 862.73618
+Current_accuracy : 78.775, Current_norm_ED  : 0.9617
+Best_accuracy    : 78.775, Best_norm_ED     : 0.9617
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+workability               | wotkabilty                | 0.0285	False
+derogate                  | derogate                  | 0.3526	True
+--------------------------------------------------------------------------------
+[1050/4000] Train loss: 0.07989, Valid loss: 0.13772, Elapsed_time: 905.88134
+Current_accuracy : 79.425, Current_norm_ED  : 0.9624
+Best_accuracy    : 79.425, Best_norm_ED     : 0.9624
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+waxbird                   | waxbird                   | 0.2793	True
+colorimetrical            | colorimetrical            | 0.1912	True
+--------------------------------------------------------------------------------
+[1100/4000] Train loss: 0.07360, Valid loss: 0.13578, Elapsed_time: 945.41617
+Current_accuracy : 79.225, Current_norm_ED  : 0.9632
+Best_accuracy    : 79.425, Best_norm_ED     : 0.9632
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+musicmonger               | musicmonger               | 0.5050	True
+helminthology             | helmintiholcgy            | 0.0146	False
+--------------------------------------------------------------------------------
+[1150/4000] Train loss: 0.07903, Valid loss: 0.13312, Elapsed_time: 988.16298
+Current_accuracy : 80.475, Current_norm_ED  : 0.9646
+Best_accuracy    : 80.475, Best_norm_ED     : 0.9646
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+scullery                  | scullery                  | 0.3461	True
+Dhabi                     | Dhabi                     | 0.4952	True
+--------------------------------------------------------------------------------
