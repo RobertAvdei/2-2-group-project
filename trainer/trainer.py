@@ -44,7 +44,7 @@ def main():
     parser.add_argument(
         "--config",
         type=str,
-        default="config_files/en_filtered_config.yaml",
+        default="trainer/config_files/en_filtered_config.yaml",
         help="Path to YAML config file",
     )
     parser.add_argument(
