@@ -41,7 +41,7 @@ export function InputFileUpload() {
 
 const runPrediction = async () => {
   if (!file) {
-    setResult("Please upload a file first.");
+    setResult("Please upload a picture first.");
     return;
   }
 
@@ -51,7 +51,7 @@ const runPrediction = async () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("/api/predict", {
+    const response = await fetch("http://localhost:3002/upload", {
       method: "POST",
       body: formData,
     });
@@ -90,8 +90,8 @@ const runPrediction = async () => {
           </SvgIcon>
         }
       >
-        {file ? file.name : "Upload a file"}
-        <VisuallyHiddenInput type="file" onChange={handleFileChange} />
+        {file ? file.name : "Upload a picture"}
+        <VisuallyHiddenInput type="file"   onChange={handleFileChange} />
       </Button>
 
       <Button  onClick={runPrediction}
@@ -112,12 +112,10 @@ const runPrediction = async () => {
         <Typography variant="h4" gutterBottom>
          Please rate the accuracy of the predicition
         </Typography>
-       <Stack direction="row" spacing={2} alignItems="center">
-  {BasicButtonGroup()}
-  <Button sx={{ width: 400 }}>
-    Submit Review
-  </Button>
-</Stack>
+        {BasicButtonGroup()}
+         <Button sx={{ width: 400 }} >
+        Submit Review
+        </Button>
 
     </div>
   );
