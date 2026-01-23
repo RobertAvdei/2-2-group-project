@@ -32,6 +32,10 @@ def count_parameters(model):
     return total_params
 
 def train(opt, show_number = 2, amp=False):
+    total_time = time.time()
+    mlflow.set_tracking_uri("http://localhost:5000")
+    mlflow.set_experiment("easy-ocr")
+    
     """ dataset preparation """
     if not opt.data_filtering_off:
         print('Filtering the images containing characters which are not in opt.character')
@@ -170,15 +174,15 @@ def train(opt, show_number = 2, amp=False):
     best_accuracy = -1
     best_norm_ED = -1
     i = start_iter
-
     scaler = GradScaler()
     t1= time.time()
     
+
     with mlflow.start_run():
         # log parameters
         mlflow.log_params(vars(opt))
-        
-    while(True):
+    continue_training = True 
+    while(continue_training):
     # train part
         optimizer.zero_grad(set_to_none=True)
 
@@ -297,6 +301,7 @@ def train(opt, show_number = 2, amp=False):
             mlflow.pytorch.log_model(model, f'model_iter_{i+1}')
 
         if i == opt.num_iter:
-            print('end the training')
-            sys.exit()
+            print('end training')
+            elapsed_time = time.time() - total_time
+            return elapsed_time
         i += 1

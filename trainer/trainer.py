@@ -59,7 +59,7 @@ def main():
     cudnn.deterministic = False
 
     opt = get_config(args.config)
-    train(opt, amp=args.amp)
+    return train(opt, amp=args.amp)
 
 
 if __name__ == "__main__":
