@@ -9,12 +9,11 @@ def connect():
         user = os.getenv('POSTGRES_USER')
         password = os.getenv('POSTGRES_PASSWORD')
         database = os.getenv('POSTGRES_DB')
-
         print('Connecting to the PostgreSQL database...')
         return psycopg2.connect(database=database, 
                         user=user,
                         password=password, 
-                        host="localhost", port="5432")
+                        host="127.0.0.1", port="5432")
     except (Exception, psycopg2.DatabaseError) as error:
         raise error
 

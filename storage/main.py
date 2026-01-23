@@ -11,9 +11,6 @@ app = Flask(__name__)
 
 
 MINIO_HOST = os.getenv("MINIO_HOST", "minio")
-MINIO_PORT = os.getenv("MINIO_PORT", "9000")
-MINIO_USER = os.getenv("MINIO_ROOT_USER", "minio")
-MINIO_PASS = os.getenv("MINIO_ROOT_PASSWORD", "minio123")
 BUCKET = os.getenv("STORAGE_BUCKET", "user-images")
 
 def ensure_bucket():
