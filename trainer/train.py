@@ -1,4 +1,4 @@
-import os
+import mlflow
 import sys
 import time
 import random
@@ -8,7 +8,9 @@ import torch.nn as nn
 import torch.nn.init as init
 import torch.optim as optim
 import torch.utils.data
-from torch.cuda.amp import autocast, GradScaler
+from torch.cuda.amp import autocast
+from torch.amp import GradScaler
+from torch.utils.data import DataLoader
 import numpy as np
 
 from utils import CTCLabelConverter, AttnLabelConverter, Averager
@@ -171,11 +173,15 @@ def train(opt, show_number = 2, amp=False):
 
     scaler = GradScaler()
     t1= time.time()
+    
+    with mlflow.start_run():
+        # log parameters
+        mlflow.log_params(vars(opt))
         
     while(True):
-        # train part
+    # train part
         optimizer.zero_grad(set_to_none=True)
-        
+
         if amp:
             with autocast():
                 image_tensors, labels = train_dataset.get_batch()
@@ -216,9 +222,12 @@ def train(opt, show_number = 2, amp=False):
                 target = text[:, 1:]  # without [GO] Symbol
                 cost = criterion(preds.view(-1, preds.shape[-1]), target.contiguous().view(-1))
             cost.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), opt.grad_clip) 
+            torch.nn.utils.clip_grad_norm_(model.parameters(), opt.grad_clip)
             optimizer.step()
         loss_avg.add(cost)
+
+        # log training loss to mlflow at each iteration
+        mlflow.log_metric('train_loss', cost.item(), step=i)
 
         # validation part
         if (i % opt.valInterval == 0) and (i!=0):
@@ -239,13 +248,23 @@ def train(opt, show_number = 2, amp=False):
 
                 current_model_log = f'{"Current_accuracy":17s}: {current_accuracy:0.3f}, {"Current_norm_ED":17s}: {current_norm_ED:0.4f}'
 
+                # log validation metrics to mlflow
+                mlflow.log_metric('valid_loss', valid_loss, step=i)
+                mlflow.log_metric('current_accuracy', current_accuracy, step=i)
+                mlflow.log_metric('current_norm_ED', current_norm_ED, step=i)
+                mlflow.log_metric('infer_time', infer_time, step=i)
+
                 # keep best accuracy model (on valid dataset)
                 if current_accuracy > best_accuracy:
                     best_accuracy = current_accuracy
                     torch.save(model.state_dict(), f'./saved_models/{opt.experiment_name}/best_accuracy.pth')
+                    mlflow.log_metric('best_accuracy', best_accuracy, step=i)
+                    mlflow.pytorch.log_model(model, f'best_accuracy_model')
                 if current_norm_ED > best_norm_ED:
                     best_norm_ED = current_norm_ED
                     torch.save(model.state_dict(), f'./saved_models/{opt.experiment_name}/best_norm_ED.pth')
+                    mlflow.log_metric('best_norm_ED', best_norm_ED, step=i)
+                    mlflow.pytorch.log_model(model, f'best_norm_ED_model')
                 best_model_log = f'{"Best_accuracy":17s}: {best_accuracy:0.3f}, {"Best_norm_ED":17s}: {best_norm_ED:0.4f}'
 
                 loss_model_log = f'{loss_log}\n{current_model_log}\n{best_model_log}'
@@ -256,10 +275,10 @@ def train(opt, show_number = 2, amp=False):
                 dashed_line = '-' * 80
                 head = f'{"Ground Truth":25s} | {"Prediction":25s} | Confidence Score & T/F'
                 predicted_result_log = f'{dashed_line}\n{head}\n{dashed_line}\n'
-                
+
                 #show_number = min(show_number, len(labels))
-                
-                start = random.randint(0,len(labels) - show_number )    
+
+                start = random.randint(0,len(labels) - show_number )
                 for gt, pred, confidence in zip(labels[start:start+show_number], preds[start:start+show_number], confidence_score[start:start+show_number]):
                     if 'Attn' in opt.Prediction:
                         gt = gt[:gt.find('[s]')]
@@ -275,6 +294,7 @@ def train(opt, show_number = 2, amp=False):
         if (i + 1) % 1e+4 == 0:
             torch.save(
                 model.state_dict(), f'./saved_models/{opt.experiment_name}/iter_{i+1}.pth')
+            mlflow.pytorch.log_model(model, f'model_iter_{i+1}')
 
         if i == opt.num_iter:
             print('end the training')

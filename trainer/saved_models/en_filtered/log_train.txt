@@ -1501,3 +1501,21 @@ Ground Truth              | Prediction                | Confidence Score & T/F
 Goldfarb                  | goldfar                   | 0.0845	False
 sobrieties                | sobrieties                | 0.7087	True
 --------------------------------------------------------------------------------
+[50/4000] Train loss: 0.18632, Valid loss: 0.28067, Elapsed_time: 234.37364
+Current_accuracy : 62.300, Current_norm_ED  : 0.9219
+Best_accuracy    : 62.300, Best_norm_ED     : 0.9219
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+xeroses                   | xeroses                   | 0.2118	True
+bostal                    | bostal                    | 0.5804	True
+--------------------------------------------------------------------------------
+[50/4000] Train loss: 0.00081, Valid loss: 0.28821, Elapsed_time: 132.91911
+Current_accuracy : 61.025, Current_norm_ED  : 0.9173
+Best_accuracy    : 61.025, Best_norm_ED     : 0.9173
+--------------------------------------------------------------------------------
+Ground Truth              | Prediction                | Confidence Score & T/F
+--------------------------------------------------------------------------------
+upstate                   | upstate                   | 0.1027	True
+osiered                   | siered                    | 0.1380	False
+--------------------------------------------------------------------------------

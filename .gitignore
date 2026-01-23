@@ -1,2 +1,3 @@
 /data
 .env
+/trainer/all_data/val
