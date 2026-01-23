@@ -48,7 +48,7 @@ def upload_picture(source_file='../test.png',destination_file='test.png'):
 
 if __name__ == "__main__":
     try:
-        with open('../test.png', 'rb') as image_file:
+        with open('../test.jpg', 'rb') as image_file:
             upload_picture(source_file=image_file)
     except S3Error as exc:
         print("error occurred.", exc)
