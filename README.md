@@ -14,16 +14,18 @@ Logs are stored in a postgres DB, while images are stored
 
 The training and serving services are not dockerized.
 
-1. Create docker container
+1. Copy .env_example and rename it .env
+
+2. Create docker container
 
 ```
 docker-compose up
 ```
 
-2. Install missing python dependencies for serving and training
+3. Install missing python dependencies for serving and training
 
 
-3. Start Serving
+4. Start Serving
 Start serving service
 
 (Wait for serving to fully download the model)
@@ -34,7 +36,7 @@ cd serving
 py main.py
 ```
 
-4. Start Training
+5. Start Training
 Unzip all_data.zip in /training
 
 Start training
