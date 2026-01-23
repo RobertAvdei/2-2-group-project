@@ -5,17 +5,17 @@ import os
 
 def connect_minio():
     load_dotenv()
-
+    print('Connecting MINIO')
     port = os.getenv('MINIO_PORT')
     access_key = os.getenv('MINIO_ROOT_USER')
     secret_key = os.getenv('MINIO_ROOT_PASSWORD')
     client = Minio(
-        endpoint=f'127.0.0.1:{port}',
+        endpoint=f'localhost:{port}',
         access_key=access_key,
         secret_key=secret_key,
         secure=False,
     )
-    
+    print('Minio Connected')
     return client
 
 

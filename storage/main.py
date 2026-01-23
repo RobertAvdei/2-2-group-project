@@ -6,17 +6,19 @@ from minio import Minio
 from minio.error import S3Error
 from db_connection import connect
 from minio_connect import connect_minio
+import io
 
 app = Flask(__name__)
 
 
 MINIO_HOST = os.getenv("MINIO_HOST", "minio")
-BUCKET = os.getenv("STORAGE_BUCKET", "user-images")
+BUCKET = 'user-images'
 
 def ensure_bucket():
     client = connect_minio()
     if not client.bucket_exists(BUCKET):
         client.make_bucket(BUCKET)
+        print("Created bucket", BUCKET)
 
 
 def init_tables():
@@ -86,6 +88,7 @@ def home():
 def upload_image():
     if "image" not in request.files:
         return jsonify({"ok": False, "error": "No image file"}), 400
+    
 
     file = request.files["image"]
     content_type = file.content_type or "application/octet-stream"
@@ -100,8 +103,9 @@ def upload_image():
 
     try:
         ensure_bucket()
+        print('Ensure bucket')
         client = connect_minio()
-        import io
+        print(client)
         client.put_object(
             BUCKET,
             image_key,
@@ -109,12 +113,14 @@ def upload_image():
             length=size,
             content_type=content_type
         )
+        print('Saved Image')
     except S3Error as e:
         return jsonify({"ok": False, "error": f"MinIO upload failed: {str(e)}"}), 500
 
 
     with connect() as conn:
         with conn.cursor() as cur:
+            print('TEST 3')
             cur.execute("""
                 INSERT INTO requests (request_id, filename, content_type, file_size_bytes, image_key)
                 VALUES (%s, %s, %s, %s, %s);

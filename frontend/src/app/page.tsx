@@ -1,22 +1,16 @@
-'use client'
-import {Typography } from "@mui/material"; 
-import {Button} from "@mui/material";
-import {SvgIcon} from "@mui/material";
-import {styled} from "@mui/material"; 
+"use client";
+import { Typography } from "@mui/material";
+import { Button } from "@mui/material";
+import { SvgIcon } from "@mui/material";
+import { styled } from "@mui/material";
 import { useState } from "react";
-import { Stack, } from "@mui/material";
-
+import { Stack } from "@mui/material";
 
 import * as React from "react";
 import { CircularIndeterminate } from "./prediction/circularIdeterminate";
-import { ButtonGroup } from "@mui/material";
 import BasicButtonGroup from "./prediction/BasicButtonGroup";
 
-
-
-
-
-const VisuallyHiddenInput = styled('input')`
+const VisuallyHiddenInput = styled("input")`
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
@@ -39,39 +33,44 @@ export default function Prediction() {
     }
   };
 
-const runPrediction = async () => {
-  if (!file) {
-    setResult("Please upload a file first.");
-    return;
-  }
+  const runPrediction = async () => {
+    if (!file) {
+      setResult("Please upload a file first.");
+      return;
+    }
 
-  setLoading(true); //  start spinner
+    setLoading(true); //  start spinner
 
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
 
-    const response = await fetch("/api/predict", {
-      method: "POST",
-      body: formData,
-    });
+      const response = await fetch("http://localhost:3002/upload", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3002",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      });
 
-    const data = await response.json();
-    setResult(JSON.stringify(data, null, 2));
-  } catch (error) {
-    setResult("Error running prediction.");
-  } finally {
-    setLoading(false); 
-  }
-};
-
+      const data = await response.json();
+      if (data?.prediction) {
+        setResult(data?.prediction.join(" "));
+      } else setResult(JSON.stringify(data, null, 2));
+    } catch (error) {
+      setResult("Error running prediction.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <Button
         component="label"
         variant="outlined"
-        sx={{ width: 200 }} 
+        sx={{ width: 200 }}
         startIcon={
           <SvgIcon>
             <svg
@@ -80,7 +79,7 @@ const runPrediction = async () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              >
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -94,8 +93,7 @@ const runPrediction = async () => {
         <VisuallyHiddenInput type="file" onChange={handleFileChange} />
       </Button>
 
-      <Button  onClick={runPrediction}
-      sx={{ width: 200 }} >
+      <Button onClick={runPrediction} sx={{ width: 200 }}>
         Run Prediction
       </Button>
 
@@ -109,17 +107,13 @@ const runPrediction = async () => {
       >
         {result}
       </pre>
-        <Typography variant="h4" gutterBottom>
-         Please rate the accuracy of the predicition
-        </Typography>
-       <Stack direction="row" spacing={2} alignItems="center">
-  {BasicButtonGroup()}
-  <Button sx={{ width: 400 }}>
-    Submit Review
-  </Button>
-</Stack>
-
+      <Typography variant="h4" gutterBottom>
+        Please rate the accuracy of the predicition
+      </Typography>
+      <Stack direction="row" spacing={2} alignItems="center">
+        {BasicButtonGroup()}
+        <Button sx={{ width: 400 }}>Submit Review</Button>
+      </Stack>
     </div>
   );
-
 }

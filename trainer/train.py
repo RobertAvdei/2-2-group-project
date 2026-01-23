@@ -294,14 +294,15 @@ def train(opt, show_number = 2, amp=False):
                 log.write(predicted_result_log + '\n')
                 print('validation time: ', time.time()-t1)
                 t1=time.time()
-        # save model per 1e+4 iter.
-        if (i + 1) % 1e+4 == 0:
-            torch.save(
-                model.state_dict(), f'./saved_models/{opt.experiment_name}/iter_{i+1}.pth')
-            mlflow.pytorch.log_model(model, f'model_iter_{i+1}')
 
         if i == opt.num_iter:
+            torch.save(
+                model.state_dict(), f'./saved_models/{opt.experiment_name}/iter_{i+1}.pth')
+            print('Saving model')
+            mlflow.pytorch.log_model(model, f'model_iter_{i+1}',registered_model_name="champion",)
+
             print('end training')
+            mlflow.end_run()
             elapsed_time = time.time() - total_time
             return elapsed_time
         i += 1

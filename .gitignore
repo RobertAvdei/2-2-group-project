@@ -4,3 +4,4 @@
 /trainer/__pycache__
 /trainer/modules/__pycache__
 /storage/__pycache__
+/serving/mlruns

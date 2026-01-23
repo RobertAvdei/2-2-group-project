@@ -13,7 +13,7 @@ def connect():
         return psycopg2.connect(database=database, 
                         user=user,
                         password=password, 
-                        host="127.0.0.1", port="5432")
+                        host="localhost", port="5432")
     except (Exception, psycopg2.DatabaseError) as error:
         raise error
 
