@@ -1,5 +1,6 @@
 import { Divider, List, ListItem, ListItemText } from "@mui/material";
 
+
 const style = {
   p: 0,
   width: '100%',
@@ -10,7 +11,8 @@ const style = {
   //backgroundColor: 'background.paper',
 };
 
-export function ListDividers() {
+
+export default function ModelInfo() {
   return (
     <List sx={style} aria-label="Model information">
       <ListItem>

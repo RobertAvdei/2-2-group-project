@@ -1,13 +1,17 @@
-import { Box, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import NavTabs from "./tabs";
 
 export default function TopBar() {
   return (
-    <Box>
-      <Typography variant="h3" gutterBottom>
-        ML Model Serving System
-      </Typography>
-      <NavTabs />
-    </Box>
+    <Grid container spacing={2}>
+      <Grid size={1}></Grid>
+      <Grid size={10}>
+        <Typography variant="h3" gutterBottom>
+          ML Model Serving System
+        </Typography>
+        <NavTabs />
+      </Grid>
+      <Grid size={1}></Grid>
+    </Grid>
   );
 }
