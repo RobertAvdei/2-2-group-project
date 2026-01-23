@@ -53,7 +53,7 @@ Call http://localhost:3004/train to run training (Requires Nvidia GPU)
 
 2. Press 'Upload a file' (Only .jpg)
 
-![test](test.png "Test File") 
+![test](test.jpg "Test File") 
 
 3. Run prediction
 
