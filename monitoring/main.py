@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-STORAGE_LOG_URL = "http://localhost:3001/log"
+STORAGE_LOG_URL = "http://storage:3001/log"
 
 @app.route("/")
 def hello_world():

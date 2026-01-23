@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
-import os, uuid, time
-import psycopg2
+import uuid
 from psycopg2.extras import RealDictCursor
-from minio import Minio
 from minio.error import S3Error
 from db_connection import connect
 from minio_connect import connect_minio
@@ -11,7 +9,6 @@ import io
 app = Flask(__name__)
 
 
-MINIO_HOST = os.getenv("MINIO_HOST", "minio")
 BUCKET = 'user-images'
 
 def ensure_bucket():

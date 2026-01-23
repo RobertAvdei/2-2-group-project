@@ -10,7 +10,7 @@ def connect_minio():
     access_key = os.getenv('MINIO_ROOT_USER')
     secret_key = os.getenv('MINIO_ROOT_PASSWORD')
     client = Minio(
-        endpoint=f'localhost:{port}',
+        endpoint=f'minio:{port}',
         access_key=access_key,
         secret_key=secret_key,
         secure=False,

@@ -20,6 +20,7 @@ def hello():
 @app.route("/upload", methods=["POST"])
 @cross_origin()
 def upload():
+    print('Received Request /upload')
     start = time.time()
 
     if "image" not in request.files:
@@ -36,8 +37,8 @@ def upload():
     # print(img.tobytes())
     try:
         print('Loading Model')
-        mlflow.set_tracking_uri("http://localhost:5000")
-        mlflow.set_experiment("easy-ocr")
+        # mlflow.set_tracking_uri("http://localhost:5000")
+        # mlflow.set_experiment("easy-ocr")
         # loaded_model = mlflow.pytorch.load_model(model_uri=f"models:/champion/latest")
         # print(loaded_model)
         result = reader.readtext(img,detail = 0)

@@ -119,10 +119,10 @@ services:
       MINIO_PORT: ${MINIO_PORT}
 
 
-  serving:
-    build: ./serving
-    ports:
-      - "3002:3002"
+  # serving:
+  #   build: ./serving
+  #   ports:
+  #     - "3002:3002"
 
   monitoring:
     build: ./monitoring
