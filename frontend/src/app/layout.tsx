@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { CssBaseline, Grid } from "@mui/material";
+import TopBar from "./shared/topBar/topBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <CssBaseline enableColorScheme />
+        <Grid className="p-4" container spacing={2}>
+          <Grid size={12}>
+            <TopBar />
+          </Grid>
+          <Grid size={1}></Grid>
+          <Grid container size={10}>
+            {children}
+          </Grid>
+          <Grid size={1}></Grid>
+        </Grid>
       </body>
     </html>
   );

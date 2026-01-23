@@ -1,65 +1,125 @@
-import Image from "next/image";
+'use client'
+import {Typography } from "@mui/material"; 
+import {Button} from "@mui/material";
+import {SvgIcon} from "@mui/material";
+import {styled} from "@mui/material"; 
+import { useState } from "react";
+import { Stack, } from "@mui/material";
 
-export default function Home() {
+
+import * as React from "react";
+import { CircularIndeterminate } from "./prediction/circularIdeterminate";
+import { ButtonGroup } from "@mui/material";
+import BasicButtonGroup from "./prediction/BasicButtonGroup";
+
+
+
+
+
+const VisuallyHiddenInput = styled('input')`
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  white-space: nowrap;
+  width: 1px;
+`;
+
+export default function Prediction() {
+  const [file, setFile] = useState<File | null>(null);
+  const [result, setResult] = useState<string>("No results yet.");
+  const [loading, setLoading] = useState(false);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setFile(event.target.files[0]);
+    }
+  };
+
+const runPrediction = async () => {
+  if (!file) {
+    setResult("Please upload a file first.");
+    return;
+  }
+
+  setLoading(true); //  start spinner
+
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/api/predict", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+    setResult(JSON.stringify(data, null, 2));
+  } catch (error) {
+    setResult("Error running prediction.");
+  } finally {
+    setLoading(false); 
+  }
+};
+
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <Button
+        component="label"
+        variant="outlined"
+        sx={{ width: 200 }} 
+        startIcon={
+          <SvgIcon>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+              />
+            </svg>
+          </SvgIcon>
+        }
+      >
+        {file ? file.name : "Upload a file"}
+        <VisuallyHiddenInput type="file" onChange={handleFileChange} />
+      </Button>
+
+      <Button  onClick={runPrediction}
+      sx={{ width: 200 }} >
+        Run Prediction
+      </Button>
+
+      {loading && <CircularIndeterminate />}
+
+      <pre
+        style={{
+          padding: "1rem",
+          borderRadius: "6px",
+        }}
+      >
+        {result}
+      </pre>
+        <Typography variant="h4" gutterBottom>
+         Please rate the accuracy of the predicition
+        </Typography>
+       <Stack direction="row" spacing={2} alignItems="center">
+  {BasicButtonGroup()}
+  <Button sx={{ width: 400 }}>
+    Submit Review
+  </Button>
+</Stack>
+
     </div>
   );
+
 }

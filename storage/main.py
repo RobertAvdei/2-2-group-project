@@ -4,36 +4,23 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from minio import Minio
 from minio.error import S3Error
+from db_connection import connect
+from minio_connect import connect_minio
 
 app = Flask(__name__)
 
 
-DATABASE_URL = os.getenv("DATABASE_URL")
 MINIO_HOST = os.getenv("MINIO_HOST", "minio")
-MINIO_PORT = os.getenv("MINIO_PORT", "9000")
-MINIO_USER = os.getenv("MINIO_ROOT_USER", "minio")
-MINIO_PASS = os.getenv("MINIO_ROOT_PASSWORD", "minio123")
 BUCKET = os.getenv("STORAGE_BUCKET", "user-images")
 
-def db_conn():
-    return psycopg2.connect(DATABASE_URL)
-
-def minio_client():
-    return Minio(
-        endpoint=f"{MINIO_HOST}:{MINIO_PORT}",
-        access_key=MINIO_USER,
-        secret_key=MINIO_PASS,
-        secure=False
-    )
-
 def ensure_bucket():
-    client = minio_client()
+    client = connect_minio()
     if not client.bucket_exists(BUCKET):
         client.make_bucket(BUCKET)
 
 
 def init_tables():
-    with db_conn() as conn:
+    with connect() as conn:
         with conn.cursor() as cur:
             cur.execute("""
                 CREATE TABLE IF NOT EXISTS requests (
@@ -113,7 +100,7 @@ def upload_image():
 
     try:
         ensure_bucket()
-        client = minio_client()
+        client = connect_minio()
         import io
         client.put_object(
             BUCKET,
@@ -126,7 +113,7 @@ def upload_image():
         return jsonify({"ok": False, "error": f"MinIO upload failed: {str(e)}"}), 500
 
 
-    with db_conn() as conn:
+    with connect() as conn:
         with conn.cursor() as cur:
             cur.execute("""
                 INSERT INTO requests (request_id, filename, content_type, file_size_bytes, image_key)
@@ -153,7 +140,7 @@ def insert_log():
     request_id = data.get("request_id")
     image_key = data.get("image_key")
 
-    with db_conn() as conn:
+    with connect() as conn:
         with conn.cursor() as cur:
             cur.execute("""
                 INSERT INTO logs (service, endpoint, latency_ms, success, request_id, image_key)
@@ -173,7 +160,7 @@ def add_feedback():
     if not request_id or rating not in ["positive", "negative"]:
         return jsonify({"ok": False, "error": "request_id + rating (positive/negative) required"}), 400
 
-    with db_conn() as conn:
+    with connect() as conn:
         with conn.cursor() as cur:
             cur.execute("""
                 INSERT INTO feedback (request_id, rating, expected_text)
@@ -187,7 +174,7 @@ def add_feedback():
 @app.route("/model", methods=["GET", "PUT"])
 def model_info():
     if request.method == "GET":
-        with db_conn() as conn:
+        with connect() as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cur:
                 cur.execute("SELECT model_name, avg_confidence FROM model_meta WHERE id=1;")
                 row = cur.fetchone()
@@ -198,7 +185,7 @@ def model_info():
     model_name = data.get("model_name")
     avg_confidence = data.get("avg_confidence")
 
-    with db_conn() as conn:
+    with connect() as conn:
         with conn.cursor() as cur:
             if model_name is not None:
                 cur.execute("UPDATE model_meta SET model_name=%s WHERE id=1;", (model_name,))
@@ -211,14 +198,14 @@ def model_info():
 @app.route("/retrain", methods=["GET", "POST"])
 def retrain_count():
     if request.method == "GET":
-        with db_conn() as conn:
+        with connect() as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cur:
                 cur.execute("SELECT retrain_count FROM model_meta WHERE id=1;")
                 row = cur.fetchone()
         return jsonify({"ok": True, "retrain_count": row["retrain_count"]}), 200
 
 
-    with db_conn() as conn:
+    with connect() as conn:
         with conn.cursor() as cur:
             cur.execute("UPDATE model_meta SET retrain_count = retrain_count + 1 WHERE id=1;")
         conn.commit()
@@ -229,7 +216,7 @@ def retrain_count():
 @app.route("/logs", methods=["GET"])
 def get_logs():
     limit = int(request.args.get("limit", 200))
-    with db_conn() as conn:
+    with connect() as conn:
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute("""
                 SELECT * FROM logs
@@ -242,12 +229,11 @@ def get_logs():
 @app.route("/images", methods=["GET"])
 def list_images():
     ensure_bucket()
-    client = minio_client()
+    client = connect_minio()
     objects = []
     for obj in client.list_objects(BUCKET, recursive=True):
         objects.append({"object_name": obj.object_name, "size": obj.size, "last_modified": str(obj.last_modified)})
     return jsonify({"ok": True, "bucket": BUCKET, "images": objects}), 200
-
 
 
 if __name__ == "__main__":

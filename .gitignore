@@ -1,3 +1,6 @@
 /data
 .env
-/trainer/all_data/val
+/trainer/all_data
+/trainer/__pycache__
+/trainer/modules/__pycache__
+/storage/__pycache__
