@@ -16,7 +16,7 @@ export default function ModelInfo() {
   return (
     <List sx={style} aria-label="Model information">
       <ListItem>
-        <ListItemText primary="Model type: Example ML Classifier" />
+        <ListItemText primary="Model type: Easy OCR" />
       </ListItem>
       <Divider component="li" />
       <ListItem>
@@ -24,11 +24,11 @@ export default function ModelInfo() {
       </ListItem>
       <Divider component="li" />
       <ListItem>
-        <ListItemText primary="Training data: Historical dataset" />
+        <ListItemText primary="Training data: Generated Data" />
       </ListItem>
       <Divider component="li" />
       <ListItem>
-        <ListItemText primary="Evaluation metric: Accuracy / F1-score" />
+        <ListItemText primary="Evaluation metric: Accuracy " />
       </ListItem>
     </List>
   );
